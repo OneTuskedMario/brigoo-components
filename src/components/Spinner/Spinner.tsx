@@ -1,4 +1,3 @@
-import React from 'React';
 import clsx from 'clsx';
 
 const sizes = {
@@ -20,7 +19,7 @@ export type SpinnerProps = {
     className?: string;
 };
 
-export const Spinner = ({ size = 'md', variant = 'primary', className = '' }: SpinnerProps) => {
+const Spinner = ({ size = 'md', variant = 'primary', className = '' }: SpinnerProps) => {
     return (
         <>
             <svg
@@ -50,3 +49,5 @@ export const Spinner = ({ size = 'md', variant = 'primary', className = '' }: Sp
 };
 
 Spinner.displayName = 'Spinner';
+
+export default Spinner;

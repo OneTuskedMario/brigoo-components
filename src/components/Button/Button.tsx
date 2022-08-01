@@ -1,10 +1,11 @@
 import clsx from 'clsx';
-import * as React from 'react';
-import { Spinner } from '../Spinner';
+import { forwardRef } from 'react';
+import Spinner from '../Spinner';
 
 
 const variants = {
     primary: 'bg-white text-main hover:text-white hover:bg-main',
+    networker: 'bg-white text-networkerMain border-networkerMain hover:text-white hover:bg-networkerMain',
     inverse: 'bg-main text-white hover:bg-white hover:text-main',
     'event-false': 'bg-main text-white',
     'event-true': 'bg-redOrange text-white',
@@ -26,17 +27,43 @@ const sizes = {
     lg: 'py-3 px-8 text-lg',
 };
 
-type IconProps = { endIcon?: JSX.Element | undefined };
+type IconProps = { hasEndIcon?: boolean };
+
+interface ArrowWhitePropTypes {
+    isHover?: boolean;
+}
+
+const Arrow = ({
+    isHover,
+}: ArrowWhitePropTypes): JSX.Element => {
+    return (
+        <svg
+            className={clsx(
+                'transform transition-all ease-in-out delay-150 duration-150',
+                isHover ? 'text-white mx-0' : 'text-main mx-2'
+            )}
+            width="22"
+            height="8"
+        >
+            <path
+                fill="currentColor"
+                d="M1.23242 3.5c-.276141 0-.499998.22386-.499998.5s.223857.5.499998.5v-1Zm20.57218.85355c.1952-.19526.1952-.51184 0-.7071L18.6226.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L20.7439 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198ZM1.23242 4.5H21.451v-1H1.23242v1Z"
+            />
+        </svg>
+    );
+};
+
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: keyof typeof variants;
     size?: keyof typeof sizes;
     isLoading?: boolean;
     isDisabled?: boolean;
+    isHover?: boolean;
     setIsHover?: React.Dispatch<React.SetStateAction<boolean>>;
 } & IconProps;
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (
         {
             type = 'button',
@@ -45,7 +72,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             size = 'md',
             isLoading = false,
             isDisabled,
-            endIcon,
+            isHover = false,
+            hasEndIcon,
             setIsHover = () => {},
             ...props
         },
@@ -68,7 +96,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             >
                 <span className="mx-2 flex items-center self-center">{props.children}</span>
                 <div>
-                    {!isLoading && endIcon}
+                    {!isLoading && hasEndIcon && (
+                        <Arrow isHover={isHover} />
+                    )}
                     {isLoading && <Spinner size="sm" className="text-current mx-2" />}
                 </div>
             </button>
@@ -76,4 +106,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 );
 
-Button.displayName = 'Button';
+export default Button;

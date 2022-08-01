@@ -5,6 +5,7 @@ module.exports = {
     theme: {
         colors: {
             main: '#7A3DA9',
+            networkerMain: '#2D27FF',
             fadedMain: '#7a3da91a',
             white: '#FFFFFF',
             eggShell: '#F9F9F9',
