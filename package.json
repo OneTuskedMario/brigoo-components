@@ -1,8 +1,5 @@
 {
-  "name": "@leafmight/brigoo-components",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/Leafmight"
-  },
+  "name": "brigoo-components",
   "version": "0.1.14",
   "description": "A simple React component library",
   "scripts": {

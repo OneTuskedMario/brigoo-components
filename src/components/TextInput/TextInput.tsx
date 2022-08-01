@@ -1,4 +1,3 @@
-import React from 'react';
 import { InputBaseComponentProps } from '@mui/material/InputBase';
 import TextField from '@mui/material/TextField';
 import { ChangeEventHandler } from 'react';
